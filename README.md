@@ -133,26 +133,26 @@ http://127.0.0.1:8000/
 
 ## 📸 Screenshots
 
+
 ### Home Page
 
-![Home](screenshots/Home Page.png)
+![Home Page](screenshots/home-page.png)
+
 ### Login Page
 
-![Login](screenshots/Login Page.png)
+![Login Page](screenshots/login-page.png)
 
 ### Register Page
 
-![Register](screenshots/Register Page.png)
-
+![Register Page](screenshots/register-page.png)
 
 ### Blog Details
 
-![BlogDetails](screenshots/Blogdetail Page.png)
+![Blog Details](screenshots/blog-detail-page.png)
 
 ### Admin Dashboard
 
-![Admin Dashboard](screenshots/Admin Dashboard.png)
-
+![Admin Dashboard](screenshots/admin-dashboard.png)
 ---
 
 ## 🌟 Future Improvements
