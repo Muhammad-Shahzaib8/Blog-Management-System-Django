@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify OTP | Blog Management System</title>
+
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f3f6fb;
+            position:relative;
+            overflow:hidden;
+        }
+
+        body::before{
+            content:"";
+            position:absolute;
+            width:520px;
+            height:520px;
+            background:url("{% static 'images/logo.png' %}") no-repeat center;
+            background-size:contain;
+            opacity:0.05;
+            z-index:0;
+        }
+
+        .otp-container{
+            width:420px;
+            background:white;
+            padding:42px;
+            border-radius:22px;
+            box-shadow:0 12px 40px rgba(0,0,0,0.12);
+            position:relative;
+            z-index:1;
+        }
+
+        .auth-logo{
+            width:95px;
+            display:block;
+            margin:0 auto 18px;
+        }
+
+        h2{
+            text-align:center;
+            color:#111827;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#6b7280;
+            margin-bottom:25px;
+            font-size:14px;
+            line-height:1.6;
+        }
+
+        .message{
+            background:#dbeafe;
+            color:#1e40af;
+            padding:12px;
+            border-radius:10px;
+            margin-bottom:15px;
+            text-align:center;
+            font-size:14px;
+        }
+
+        form p{
+            margin-bottom:18px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:7px;
+            font-weight:bold;
+            color:#374151;
+        }
+
+        input{
+            width:100%;
+            padding:14px;
+            border:1px solid #d1d5db;
+            border-radius:10px;
+            outline:none;
+            font-size:16px;
+            letter-spacing:2px;
+            text-align:center;
+        }
+
+        input:focus{
+            border-color:#2563eb;
+            box-shadow:0 0 8px rgba(37,99,235,0.2);
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+            margin-top:10px;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        .bottom-text{
+            text-align:center;
+            margin-top:18px;
+            color:#6b7280;
+            font-size:14px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="otp-container">
+
+        <img src="{% static 'images/logo.png' %}" class="auth-logo">
+
+        <h2>OTP Verification</h2>
+
+        <p class="subtitle">
+            Enter the 6-digit OTP sent to your email address
+        </p>
+
+        {% for message in messages %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Verify OTP
+            </button>
+
+        </form>
+
+        <div class="bottom-text">
+            Secure verification powered by Blog Management System
+        </div>
+
+    </div>
+
+</body>
+
+</html>

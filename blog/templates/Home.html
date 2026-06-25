@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Management System</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo-box">
+        <img src="{% static 'images/logo.png' %}" class="site-logo">
+        <span>Blog Management System</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/admin/">Admin</a>
+        <a href="{% url 'categories' %}">Categories</a>
+        <a href="{% url 'trending_blogs' %}">Trending</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'submit_blog' %}">Submit Blog</a>
+
+            <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Advanced Blog Management System</h1>
+    <p>Create, Manage, Publish and Explore Professional Content</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- SEARCH -->
+    <form method="GET" action="/" class="search-box">
+        <input type="text" name="q" placeholder="Search blogs...">
+    </form>
+
+    <h2 class="section-title">Latest Blogs</h2>
+
+    <!-- BLOG GRID -->
+    <div class="blog-grid">
+
+        {% for blog in blogs %}
+        <div class="blog-card">
+
+            <!-- BLOG IMAGE -->
+            <div class="image-wrapper">
+                {% if blog.featured_image %}
+                    <img src="{{ blog.featured_image.url }}" class="blog-image">
+                {% endif %}
+
+                <span class="category-badge">
+                    {{ blog.category.name }}
+                </span>
+            </div>
+
+            <!-- BLOG CONTENT -->
+            <div class="card-content">
+                <h2>{{ blog.title }}</h2>
+
+                <p class="description">
+                    {{ blog.short_description|truncatewords:18 }}
+                </p>
+
+                <!-- READ MORE BUTTON MOVED NEAR CONTENT -->
+                <a href="{% url 'blog_detail' blog.slug %}" class="read-btn">
+                    Read More
+                </a>
+
+                <!-- BLOG STATS -->
+                <div class="stats">
+                    <span>👁 {{ blog.views }}</span>
+                    <span>❤️ {{ blog.likes }}</span>
+
+                    <span>
+                        ⭐
+                        {% if blog.average_rating %}
+                            {{ blog.average_rating|floatformat:1 }}/5
+                        {% else %}
+                            0/5
+                        {% endif %}
+                    </span>
+                </div>
+
+                <!-- AUTHOR -->
+                <div class="author-section">
+                    {% if blog.author.userprofile.profile_image %}
+                        <img src="{{ blog.author.userprofile.profile_image.url }}" class="author-image">
+                    {% else %}
+                        <div class="profile-placeholder">
+                            {{ blog.author.username|first|upper }}
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <h4>{{ blog.author.username }}</h4>
+                        <small>{{ blog.created_at|date:"M d, Y" }}</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+            <h3>No Blogs Published Yet</h3>
+        {% endfor %}
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+                <div class="footer">
+                    <p>© 2026 Blog Management System</p>
+                </div>
+
+</body>
+</html>

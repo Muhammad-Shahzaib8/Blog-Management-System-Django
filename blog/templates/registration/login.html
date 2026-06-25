@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Blog Management System</title>
+
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f3f6fb;
+            overflow:hidden;
+            position:relative;
+        }
+
+        body::before{
+            content:"";
+            position:absolute;
+            width:500px;
+            height:500px;
+            background:url("{% static 'images/logo.png' %}") no-repeat center;
+            background-size:contain;
+            opacity:0.05;
+            z-index:0;
+        }
+
+        .login-container{
+            width:400px;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.1);
+            position:relative;
+            z-index:1;
+        }
+
+        .auth-logo{
+            width:90px;
+            display:block;
+            margin:0 auto 15px;
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#111827;
+        }
+
+        form p{
+            margin-bottom:18px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:6px;
+            font-weight:bold;
+            color:#374151;
+        }
+
+        input{
+            width:100%;
+            padding:13px;
+            border:1px solid #d1d5db;
+            border-radius:10px;
+            outline:none;
+            font-size:15px;
+        }
+
+        input:focus{
+            border-color:#2563eb;
+            box-shadow:0 0 8px rgba(37,99,235,0.2);
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+            margin-top:10px;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        .register-link{
+            text-align:center;
+            margin-top:18px;
+            color:#555;
+        }
+
+        .register-link a{
+            color:#2563eb;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .register-link a:hover{
+            text-decoration:underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <img src="{% static 'images/logo.png' %}" class="auth-logo">
+
+        <h2>User Login</h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <div class="register-link">
+
+            New user?
+
+            <a href="{% url 'register' %}">
+                Create an account
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

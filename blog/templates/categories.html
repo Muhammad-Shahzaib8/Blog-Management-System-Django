@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories | Blog Management System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f3f6fb;
+            margin: 0;
+        }
+
+        .navbar {
+            background: #111827;
+            padding: 18px 50px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 60px 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: #111827;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="/">← Blog Management System</a>
+    </div>
+
+    <div class="container">
+        <h1>Blog Categories</h1>
+
+        <div class="category-grid">
+            {% for category in categories %}
+                <a href="{% url 'category_blogs' category.slug %}" class="category-card">
+                    {{ category.name }}
+                </a>
+            {% empty %}
+                <p>No categories found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
