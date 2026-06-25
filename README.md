@@ -148,7 +148,7 @@ http://127.0.0.1:8000/
 
 ### Blog Details
 
-![Blog Details](screenshots/blog-detail-page.png)
+![Blog Details](screenshots/blog-detai-page.png)
 
 ### Admin Dashboard
 
